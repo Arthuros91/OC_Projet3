@@ -93,8 +93,16 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	
+}
+li a{
+	text-decoration: none;
+	color:black;
 }
 
+li a:focus{
+	font-weight: bold;
+}
 li:hover {
 	color: #B1663C;
 }
@@ -143,13 +151,10 @@ button{
 	border: 1px solid #1D6154;
 }
 
-button:active{
+button:focus{
 	background-color: #1D6154;
 	color:white;
 }
-
-
-
 
 
 .gallery {
@@ -183,13 +188,13 @@ margin: auto;
 	flex-direction: column;
 }
 
-#contact input {
+input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -214,3 +219,26 @@ footer nav ul {
 	margin: 2em
 }
 
+
+
+/* LOG IN */
+
+#loginMain{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 100px;
+}
+
+#inputBox{
+	display: flex;
+	flex-direction: column;
+	margin: 35px 0px 355px 0px;
+	width:33%;
+}
+
+
+
+
+
+/*MODALE*/
