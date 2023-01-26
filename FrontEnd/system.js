@@ -15,8 +15,6 @@ async function GenerateGallery(works){
         const images = await reponseImg.blob();
         const imageURL = URL.createObjectURL(images);
         
-        
-    
         const figure = document.createElement("figure");
         const figureImg = document.createElement("img");
         figureImg.src= imageURL;
@@ -101,6 +99,6 @@ btnHR.addEventListener("click",function(){
 });
 
 
-/* LOG IN FUNCTIONS */
 
+/* LOG IN FUNCTIONS */
 
