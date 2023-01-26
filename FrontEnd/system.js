@@ -70,6 +70,9 @@ btnCategoriesBox.appendChild(btnHR);
 
     /*Buttons Functions */
 
+const reponseCat = await fetch("http://localhost:5678/api/categories");
+const categories = await reponseCat.json();
+
 
 btnAll.addEventListener("click", function(){
     UpdateGallery(works);
@@ -78,21 +81,26 @@ btnAll.addEventListener("click", function(){
 
 btnObjects.addEventListener("click",function(){
     const list = works.filter(function(work){
-        return work.categoryId === 1;
+        return work.categoryId === categories[0].id;
     });
     UpdateGallery(list);
 });
 
 btnApparts.addEventListener("click",function(){
     const list = works.filter(function(work){
-        return work.categoryId === 2;
+        return work.categoryId === categories[1].id;
     });
     UpdateGallery(list);
 });
 
 btnHR.addEventListener("click",function(){
     const list = works.filter(function(work){
-        return work.categoryId === 3;
+        return work.categoryId === categories[2].id;
     });
     UpdateGallery(list);
 });
+
+
+/* LOG IN FUNCTIONS */
+
+
