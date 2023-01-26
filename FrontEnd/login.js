@@ -19,20 +19,20 @@ const fakeUser  = {
 };
 
 const userInput = {
-    "email" : emailInput.value,
-    "mot de passe" : passwordInput.value,
+    "email" : "",
+    "mot de passe" : "",
     "token" : null
 };
-const chargeUtileInput = JSON.stringify(userInput);
 
-
-const chargeUtile = JSON.stringify(user);
-const chargeInutile = JSON.stringify(fakeUser);
 
 
 
 authentificationForm.addEventListener("submit",async function(event){
     event.preventDefault();
+
+    userInput.email = emailInput.value;
+    userInput.password = passwordInput.value;
+    const chargeUtileInput = JSON.stringify(userInput);
 
     const envoiInput = await fetch("http://localhost:5678/api/users/login",{
         method: "POST",
