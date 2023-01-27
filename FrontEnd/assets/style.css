@@ -242,7 +242,11 @@ footer nav ul {
 	color:red;
 }
 
-
+#connectBanner{
+	display:none;
+	background-color: black;
+	height:60px;
+}
 
 
 /*MODALE*/

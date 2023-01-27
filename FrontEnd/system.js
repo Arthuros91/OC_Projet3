@@ -1,6 +1,14 @@
 const reponse = await fetch("http://localhost:5678/api/works");
 const works = await reponse.json();
 
+const user = window.localStorage.getItem("userId");
+const userId = JSON.parse(user);
+const connectBanner = document.querySelector("#connectBanner");
+
+if (userId.token != ""){
+    connectBanner.style.display = "initial";
+}
+console.log(userId);
 
 /* GALLERY GENERATION */
 

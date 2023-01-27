@@ -6,21 +6,9 @@ const emailInput = document.querySelector("#emailInput");
 const passwordInput = document.querySelector("#passwordInput");
 
 
-const user = {
-    "email" : "sophie.bluel@test.tld",   
-    "password" : "S0phie",
-    "token" : null
-
-};
-
-const fakeUser  = {
-    "email" : "gaga",
-    "password" :"fhfhgjgk"
-};
-
 const userInput = {
     "email" : "",
-    "mot de passe" : "",
+    "password" : "",
     "token" : null
 };
 
@@ -40,18 +28,23 @@ authentificationForm.addEventListener("submit",async function(event){
         body: chargeUtileInput
     });
     const authentificationUser = await envoiInput.json();
-    console.log(authentificationUser);
-    console.log(userInput);
 
     if (authentificationUser.token != null){
         userInput.token = authentificationUser.token;
+        
+        const user = JSON.stringify(userInput);
+        window.localStorage.setItem("userId", user);
         window.location.href="index.html";
+
     }
     else{
         errorMessage.innerText = "Email ou mot de passe incorrect";
     }
 
 });
+
+
+
 
 
 
