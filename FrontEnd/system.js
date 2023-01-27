@@ -5,9 +5,9 @@ const user = window.localStorage.getItem("userId");
 const userId = JSON.parse(user);
 const connectBanner = document.querySelector("#connectBanner");
 
-if (userId.token != ""){
-    connectBanner.style.display = "initial";
-}
+//if (userId.token != ""){
+    //connectBanner.style.display = "initial";
+//}
 console.log(userId);
 
 /* GALLERY GENERATION */
@@ -110,3 +110,4 @@ btnHR.addEventListener("click",function(){
 
 /* LOG IN FUNCTIONS */
 
+    /*Modale*/

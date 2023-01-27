@@ -243,10 +243,35 @@ footer nav ul {
 }
 
 #connectBanner{
-	display:none;
+	
 	background-color: black;
 	height:60px;
 }
 
 
-/*MODALE*/
+
+/*EDIT MODE*/
+
+
+#connectBanner{
+	display: flex;	
+	justify-content: center;
+	align-items: center;
+}
+
+#connectBanner p {
+	color:white;
+	margin:0px 15px 0px 5px;
+}
+
+.pen{
+	color:white;
+}
+
+	/* Modale */
+
+#modale{
+	width:100%;
+	height:100%;
+	background-color: rgba(0,0,0,0.8);
+}
