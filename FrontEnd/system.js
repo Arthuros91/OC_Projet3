@@ -137,21 +137,21 @@ function addIcons(parentNodeSelector, insertBeforeObject){
     
     const icon = document.createElement("i");
     icon.className = "fa-regular fa-pen-to-square "; 
-    const editModeText = document.createElement("p");
+    const editModeText = document.createElement("button");
     editModeText.innerText = "modifier";
 
     editIconBox.appendChild(icon);
     editIconBox.appendChild(editModeText);
 
     const parentNode = document.querySelector(parentNodeSelector);
-    parentNode.insertBefore(editIconBox, insertBeforeObject);
+    parentNode.appendChild(editIconBox);
 };
 
-addIcons("#portfolio", btnCategoriesBox);
 
 
-const login = document.querySelector(".login");
-login.innerText = "logout";
+    /* Buttons */
+
+
 
 
 
@@ -169,3 +169,24 @@ modale.appendChild(modaleContent);
 
 
 
+    /* LOG IN MODE */
+
+const login = document.querySelector(".login");
+
+if (userId.token !=null){
+    connectBanner.style.display = "flex";
+    
+    disconnectUser();
+    addIcons("#portfolioTitle");
+}
+
+
+
+function disconnectUser(){
+    login.innerText = "logout";
+    login.addEventListener("click", function(){
+        window.localStorage.removeItem("userId");
+        login.href = "index.html";
+        
+    });
+}

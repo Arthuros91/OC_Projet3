@@ -254,7 +254,7 @@ footer nav ul {
 
 
 #connectBanner{
-	display: flex;	
+	display: none;	
 	justify-content: center;
 	align-items: center;
 }
@@ -264,16 +264,35 @@ footer nav ul {
 	margin:0px 15px 0px 5px;
 }
 
+#portfolioTitle{
+	display: flex;
+	justify-content: center;
+	
+}
+
 .pen{
 	color:white;
 }
 
 .editIconBox{
 	display:flex;
+	padding: 10px;
+	align-items: flex-start;
 }
 
 .editIconBox i{
 	margin:0px 5px;
+}
+
+.editIconBox button{
+	background-color: white;
+	color:black;
+	font-family: "work Sans";
+	font-size: 14px;
+	padding:0px;
+	margin:0px;
+	border-radius: 0px;
+	border: none;
 }
 	/* Modale */
 
