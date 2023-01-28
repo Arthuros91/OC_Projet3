@@ -3,11 +3,9 @@ const works = await reponse.json();
 
 const user = window.localStorage.getItem("userId");
 const userId = JSON.parse(user);
-const connectBanner = document.querySelector("#connectBanner");
 
-//if (userId.token != ""){
-    //connectBanner.style.display = "initial";
-//}
+
+
 console.log(userId);
 
 /* GALLERY GENERATION */
@@ -110,4 +108,64 @@ btnHR.addEventListener("click",function(){
 
 /* LOG IN FUNCTIONS */
 
+
+    /* EditMode Banner */
+
+const connectBanner = document.querySelector("#connectBanner");
+
+const editIconBox= document.createElement("div");
+editIconBox.className = "editIconBox";
+const icon = document.createElement("i");
+icon.className = "fa-regular fa-pen-to-square pen"; 
+const editModeText = document.createElement("p");
+editModeText.innerText = "Mode édition";
+const editModeButton = document.createElement("button");
+editModeButton.id = "applyChange";
+editModeButton.innerText = "Appliquer les changements";
+
+connectBanner.appendChild(icon);
+connectBanner.appendChild(editModeText);
+connectBanner.appendChild(editModeButton);
+
+
+    /* Icons */ 
+
+
+function addIcons(parentNodeSelector, insertBeforeObject){
+    const editIconBox= document.createElement("div");
+    editIconBox.className = "editIconBox mainIcon";
+    
+    const icon = document.createElement("i");
+    icon.className = "fa-regular fa-pen-to-square "; 
+    const editModeText = document.createElement("p");
+    editModeText.innerText = "modifier";
+
+    editIconBox.appendChild(icon);
+    editIconBox.appendChild(editModeText);
+
+    const parentNode = document.querySelector(parentNodeSelector);
+    parentNode.insertBefore(editIconBox, insertBeforeObject);
+};
+
+addIcons("#portfolio", btnCategoriesBox);
+
+
+const login = document.querySelector(".login");
+login.innerText = "logout";
+
+
+
     /*Modale*/
+
+const header = document.querySelector("header");
+const modale = document.querySelector("#modale");
+
+const modaleContent = document.createElement("div");
+modaleContent.className = "modaleContent";
+
+
+
+modale.appendChild(modaleContent);
+
+
+
