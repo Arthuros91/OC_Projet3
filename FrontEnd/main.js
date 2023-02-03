@@ -128,10 +128,12 @@ connectBanner.appendChild(editModeText);
 connectBanner.appendChild(editModeButton);
 
 
+
+
     /* Icons */ 
 
 
-function addIcons(parentNodeSelector, insertBeforeObject){
+function addIcons(parentNodeSelector){
     const editIconBox= document.createElement("div");
     editIconBox.className = "editIconBox mainIcon";
     
@@ -155,7 +157,7 @@ function addIcons(parentNodeSelector, insertBeforeObject){
 
 
 
-    /*Modale*/
+/* MODALE */
 
 const header = document.querySelector("header");
 const modale = document.querySelector("#modale");
@@ -164,20 +166,91 @@ const modaleContent = document.createElement("div");
 modaleContent.className = "modaleContent";
 
 
-
 modale.appendChild(modaleContent);
+    
+
+    /* Close Button */
+
+const closeButton = document.createElement("button");
+closeButton.className = "closeButton";
+closeButton.innerText = "X";
+
+modaleContent.appendChild(closeButton);
+closeButton.addEventListener("click", function(){
+    modale.style.display = "none";
+});
+
+
+    /* Modale Title */
+
+const modaleTitle = document.createElement("h3");
+modaleTitle.className = "modaleTitle";
+modaleTitle.innerText = "Galerie Photo";
+
+modaleContent.appendChild(modaleTitle);
+    
+
+    /* Gallery Content */
+
+const galleryContainer = document.createElement("div");
+galleryContainer.className = "galleryModale";
+
+modaleContent.append(galleryContainer);
+
+async function GenerateModaleGallery(works){
+    
+    for (let i = 0; i< works.length ; i++){
+    
+        const work = works[i];
+        const reponseImg = await fetch(work.imageUrl);
+        const images = await reponseImg.blob();
+        const imageURL = URL.createObjectURL(images);
+        
+        const figure = document.createElement("figure");
+        const figureImg = document.createElement("img");
+        figureImg.src= imageURL;
+        figureImg.alt = work.title;
+        
+        const figcaption = document.createElement("figcaption");
+        figcaption.innerText = "éditer";
+        
+        figure.appendChild(figureImg);
+        figure.appendChild(figcaption);
+        galleryContainer.appendChild(figure);
+    }
+}
+
+GenerateModaleGallery(works);
+
+
+function loadGallery(){
+    modaleTitle.innerText = "Galerie Photo";
+    GenerateModaleGallery(works);
+}
 
 
 
-    /* LOG IN MODE */
+    /* Add Photo Content */
+
+function loadAddMode(){
+    modaleTitle.innerText = "Ajout Photo";
+}
+
+
+
+
+
+/* LOG IN MODE */
 
 const login = document.querySelector(".login");
 
-if (userId.token !=null){
+if (userId !=null){
     connectBanner.style.display = "flex";
-    
+
+
     disconnectUser();
     addIcons("#portfolioTitle");
+    modifyOptions();
 }
 
 
@@ -186,7 +259,13 @@ function disconnectUser(){
     login.innerText = "logout";
     login.addEventListener("click", function(){
         window.localStorage.removeItem("userId");
-        login.href = "index.html";
-        
+        login.href = "index.html";   
+    });
+}
+
+function modifyOptions(){
+    const modifyButton = document.querySelector(".mainIcon button");
+    modifyButton.addEventListener("click", function(){
+    modale.style.display = "initial";
     });
 }

@@ -32,7 +32,7 @@ authentificationForm.addEventListener("submit",async function(event){
     if (authentificationUser.token != null){
         userInput.token = authentificationUser.token;
         
-        const user = JSON.stringify(userInput);
+        const user = JSON.stringify(userInput.token);
         window.localStorage.setItem("userId", user);
         window.location.href="index.html";
 

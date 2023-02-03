@@ -12,7 +12,7 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
+article, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
@@ -294,6 +294,8 @@ footer nav ul {
 	border-radius: 0px;
 	border: none;
 }
+
+
 	/* Modale */
 
 #modale{
@@ -305,7 +307,42 @@ footer nav ul {
 }
 
 .modaleContent{
-	width:55%;
-	height:30%;
+	width:40%;
+	height:70%;
 	background-color: white;
+	margin:10% 20%;
+	display: flex;
+	flex-direction: column;
+}
+
+.closeButton{
+	width:10%;
+	align-self: flex-end;
+	margin:5% 5% 3% 5%;
+	padding:0%;
+	border: none;
+	font-size: 20px;
+	color: black;
+
+}
+
+.closeButton:focus{
+	background-color: white;
+	color:grey;
+}
+
+.modaleTitle{
+	font-size: 30px;
+	align-self: center;
+	font-family: 'Work Sans';
+	font-weight: 400;
+}
+
+.galleryModale {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+	overflow: auto;
 }
