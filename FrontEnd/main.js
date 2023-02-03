@@ -210,6 +210,7 @@ async function GenerateModaleGallery(works){
         const figureImg = document.createElement("img");
         figureImg.src= imageURL;
         figureImg.alt = work.title;
+        figureImg.className = "modaleImg";
         
         const figcaption = document.createElement("figcaption");
         figcaption.innerText = "éditer";
@@ -221,6 +222,7 @@ async function GenerateModaleGallery(works){
 }
 
 GenerateModaleGallery(works);
+
 
 
 function loadGallery(){
