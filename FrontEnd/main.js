@@ -159,13 +159,13 @@ function addIcons(parentNodeSelector){
 
 /* MODALE */
 
+    
+
 const header = document.querySelector("header");
 const modale = document.querySelector("#modale");
 
 const modaleContent = document.createElement("div");
 modaleContent.className = "modaleContent";
-
-
 modale.appendChild(modaleContent);
     
 
@@ -188,7 +188,7 @@ modaleTitle.className = "modaleTitle";
 modaleTitle.innerText = "Galerie Photo";
 
 modaleContent.appendChild(modaleTitle);
-    
+
 
     /* Gallery Content */
 
@@ -212,11 +212,12 @@ async function GenerateModaleGallery(works){
         figureImg.alt = work.title;
         figureImg.className = "modaleImg";
         
-        const figcaption = document.createElement("figcaption");
-        figcaption.innerText = "éditer";
+        const editButton = document.createElement("button");
+        editButton.innerText = "éditer";
+        editButton.className = "modaleGalleryEditButton"
         
         figure.appendChild(figureImg);
-        figure.appendChild(figcaption);
+        figure.appendChild(editButton);
         galleryContainer.appendChild(figure);
     }
 }
@@ -225,14 +226,30 @@ GenerateModaleGallery(works);
 
 
 
+
 function loadGallery(){
     modaleTitle.innerText = "Galerie Photo";
     GenerateModaleGallery(works);
 }
 
+    /* modaleOptionsButtons */
+
+const modaleOptionsButtons = document.createElement("div");
+modaleOptionsButtons.id = "modaleOptionsButtons";
+const addPhotoButton = document.createElement("button");
+addPhotoButton.id = "addPhotoButton";
+addPhotoButton.innerText = "Ajouter une photo";
+const deleteGalleryButton = document.createElement("button");
+deleteGalleryButton.id = "deleteGalleryButton";
+deleteGalleryButton.innerText = "Supprimer la galerie";
+
+modaleContent.appendChild(modaleOptionsButtons);
+modaleOptionsButtons.appendChild(addPhotoButton);
+modaleOptionsButtons.appendChild(deleteGalleryButton);
 
 
     /* Add Photo Content */
+
 
 function loadAddMode(){
     modaleTitle.innerText = "Ajout Photo";
@@ -252,7 +269,7 @@ if (userId !=null){
 
     disconnectUser();
     addIcons("#portfolioTitle");
-    modifyOptions();
+    openModale();
 }
 
 
@@ -265,9 +282,9 @@ function disconnectUser(){
     });
 }
 
-function modifyOptions(){
+function openModale(){
     const modifyButton = document.querySelector(".mainIcon button");
     modifyButton.addEventListener("click", function(){
-    modale.style.display = "initial";
+    modale.style.display = "flex";
     });
 }
