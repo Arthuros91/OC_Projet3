@@ -240,7 +240,7 @@ footer nav ul {
 
 .login{
 	font-family: 'Work Sans';
-	font-size: 14px;
+	font-size: 17px;
 }
 
 #inputBox{
@@ -309,7 +309,7 @@ footer nav ul {
 }
 
 
-	/* Modale */
+/* MODALE */
 
 #modale{
 	width:100%;
@@ -332,10 +332,27 @@ footer nav ul {
 	align-items: center;
 }
 
+
+	/* Navigations Buttons */
+
+#navButtons{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 90%;
+	margin:10px 0px;
+}
+
+#returnButton{
+	border:none;
+	color: black;
+	
+	padding: 0%;
+}
+
 .closeButton{
 	width:10%;
-	align-self: flex-end;
-	margin:2% 0% 0% 5%;
+	
 	padding:0%;
 	border: none;
 	font-size: 20px;
@@ -355,6 +372,9 @@ footer nav ul {
 	font-weight: 400;
 	margin:1% 0%;
 }
+
+
+	/* Modale Gallery */
 
 .galleryModale {
 	display: grid;
@@ -385,6 +405,7 @@ footer nav ul {
 	border: none;
 }
 
+	/* modaleOptionsButtons */
 
 #modaleOptionsButtons{
 	display: flex;
@@ -407,4 +428,22 @@ footer nav ul {
 #deleteGalleryButton{
 	color: #D65353;
 	border: none;
+}
+
+	/* Add Photo Module */
+
+#addPhotoContainer{
+	height: 35%;
+	width:70%;
+	background-color: #E8F1F6;
+	margin: 5% 0%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.fa-light .fa-image-landscape{
+	width: 20px;
+	height:20px;
+	color: black;
 }
