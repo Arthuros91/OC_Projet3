@@ -440,7 +440,7 @@ footer nav ul {
 }
 
 #addPhotoContainer{
-	height: 28%;
+	height: 30%;
 	width:70%;
 	background-color: #E8F1F6;
 	margin: 2% 0%;
@@ -449,15 +449,31 @@ footer nav ul {
 	align-items: center;
 }
 
+#imgInputLabel{
+	padding:10px 20px;
+	border-radius: 30px;
+	background-color:#CBD6DC;
+	color:#306685;
+	font-family: "Syne";
+	font-size: 16px;
+}
+
+#imgInput{
+	margin:5% 0%;
+	color: red;
+}
+
+
 .fa-image{
 	margin:15px;
 	border-radius: 0%;
 	color:#B9C5CC;
 }
 
-#addPhotoContainer button{
+#addImgButton{
 	background-color:#CBD6DC;
 	color:#306685;
+	border: none;
 }
 
 .inputText{

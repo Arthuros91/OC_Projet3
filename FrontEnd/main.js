@@ -225,33 +225,34 @@ async function GenerateModaleGallery(works){
 
 
     /* Add Photo Content */ 
-function GenerateimgInputBox(){
+
+function GenerateImgInputBox(){
     const addPhotoForm = document.createElement("form");
     addPhotoForm.id = "addPhotoForm";
 
     const addPhotoContainer = document.createElement("div");
     addPhotoContainer.id = "addPhotoContainer";
     
+    const imgInputLabel = document.createElement("label");
+    imgInputLabel.id = "imgInputLabel";
+    imgInputLabel.innerText = "+ Ajouter Photo";
 
     const imgInput = document.createElement("input");
     imgInput.type = "file";
     imgInput.id = "imgInput";
-    imgInput.innerText = "blablabla";
+    imgInput.style.display = "none";
     imgInput.accept = "image/png , image/jpg";
     imgInput.name = "imgInput";
 
     const imgLogo = document.createElement("i");
     imgLogo.className = "fa-regular fa-image fa-5x";
-    const addImgButton = document.createElement("button");
-    addImgButton.id = "addImgButton";
-    addImgButton.innerText = "+ Ajouter photo";
     const addPhotoText = document.createElement("p");
     addPhotoText.id = "addPhotoText";
     addPhotoText.innerText = "jpg, png : 4mo max";
 
-    addPhotoContainer.appendChild(imgInput);
-    addPhotoContainer.appendChild(imgLogo);
-    addPhotoContainer.appendChild(addImgButton);
+    imgInputLabel.appendChild(imgInput);
+    imgInputLabel.appendChild(imgLogo);
+    addPhotoContainer.appendChild(imgInputLabel);
     addPhotoContainer.appendChild(addPhotoText);
     addPhotoForm.appendChild(addPhotoContainer);
 
@@ -327,7 +328,6 @@ modale.addEventListener("click",function(event){
 });
 
 
-
     /* CONTENT GENERATION FUNCTIONS */
 
     const photo = {
@@ -347,13 +347,15 @@ function loadAddPhotoContent(){
     modaleContent.innerHTML = "";
     generateNavButtons();
     GenerateTitle("Galerie Photo");
-    GenerateimgInputBox();
+    GenerateImgInputBox();
     GenerateAddPhotoModule();
 }
 
 const titleInputText = document.querySelector("#titleInputText");
 const catInputText = document.querySelector("#catInputText");
+
 const addImgButton = document.querySelector("#addImgButton");
+const validateButton = document.querySelector("#validateButton");
 
 
 /* LOG IN MODE */
@@ -368,7 +370,6 @@ if (userId !=null){
 }
 
 
-
 function disconnectUser(){
     login.innerText = "logout";
     login.addEventListener("click", function(){
@@ -376,6 +377,7 @@ function disconnectUser(){
         login.href = "index.html";   
     });
 }
+
 
 function openModale(){
     const modifyButton = document.querySelector(".mainIcon button");
