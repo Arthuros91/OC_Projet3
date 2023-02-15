@@ -386,7 +386,7 @@ footer nav ul {
 	width: 70%;
 	align-self: center;
 	margin:2% 0% 0% 0%;
-	border-bottom: 1px solid #B3B3B3;
+	
 }
 
 .galleryModale img{
@@ -433,17 +433,32 @@ footer nav ul {
 	/* Add Photo Module */
 
 #addPhotoContainer{
-	height: 35%;
+	height: 28%;
 	width:70%;
 	background-color: #E8F1F6;
-	margin: 5% 0%;
+	margin: 2% 0%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.fa-light .fa-image-landscape{
-	width: 20px;
-	height:20px;
-	color: black;
+.fa-image{
+	margin:15px;
+	border-radius: 0%;
+	color:#B9C5CC;
+}
+
+#addPhotoContainer button{
+	background-color:#CBD6DC;
+	color:#306685;
+}
+
+#addPhotoForm{
+	display: flex;
+	flex-direction: column;
+	width: 70%;
+}
+
+#catInputText{
+	margin-bottom:10%;
 }

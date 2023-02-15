@@ -132,7 +132,6 @@ connectBanner.appendChild(editModeButton);
 
     /* Icons */ 
 
-
 function addIcons(parentNodeSelector){
     const editIconBox= document.createElement("div");
     editIconBox.className = "editIconBox mainIcon";
@@ -254,11 +253,52 @@ function GenerateOptionsButtons(){
 function GenerateAddPhotoModule(){
     const addPhotoContainer = document.createElement("div");
     addPhotoContainer.id = "addPhotoContainer";
-    const imgLogo = document.createElement("div");
-    imgLogo.innerHTML = "<i class=\"fa-light fa-image-landscape\"></i>"
+    const imgLogo = document.createElement("i");
+    imgLogo.className = "fa-regular fa-image fa-5x";
+    const addImgButton = document.createElement("button");
+    addImgButton.id = "addImgButton";
+    addImgButton.innerText = "+ Ajouter photo";
+    const addPhotoText = document.createElement("p");
+    addPhotoText.id = "addPhotoText";
+    addPhotoText.innerText = "jpg, png : 4mo max";
+    
+    const addPhotoForm = document.createElement("form");
+    addPhotoForm.id = "addPhotoForm";
+    
+    const titleLabelInputText = document.createElement("label");
+    titleLabelInputText.id = "titleLabelInputText";
+    titleLabelInputText.innerText = "Titre";
+    titleLabelInputText.for = "titleInputText";
+    const titleInputText = document.createElement("input");
+    titleInputText.type = "text";
+    titleInputText.name = "titleInputText";
+    titleInputText.id = "titleInputText";
+
+    const catLabelInputText = document.createElement("label");
+    catLabelInputText.id = "catLabelInputText";
+    catLabelInputText.innerText = "Catégorie";
+    catLabelInputText.for = "catInputText";
+    const catInputText = document.createElement("input");
+    catInputText.type = "text";
+    catInputText.name = "catInputText";
+    catInputText.id = "catInputText";
+
+    const validateButton = document.createElement("button");
+    validateButton.id = "validateButton";
+    validateButton.innerText = "Valider";
 
     addPhotoContainer.appendChild(imgLogo);
+    addPhotoContainer.appendChild(addImgButton);
+    addPhotoContainer.appendChild(addPhotoText);
+
+    addPhotoForm.appendChild(titleLabelInputText);
+    addPhotoForm.appendChild(titleInputText);
+    addPhotoForm.appendChild(catLabelInputText);
+    addPhotoForm.appendChild(catInputText);
+
     modaleContent.appendChild(addPhotoContainer);
+    modaleContent.appendChild(addPhotoForm);
+    modaleContent.appendChild(validateButton);
 }
 
 function loadGallery(){
@@ -270,7 +310,14 @@ function loadGallery(){
 }
 
 
+/* Close modale */ 
 
+modale.addEventListener("click",function(event){
+    if (event.target == modale){
+        modale.style.display = "none";
+    }
+    
+});
 
 
 
