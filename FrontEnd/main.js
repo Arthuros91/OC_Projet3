@@ -194,7 +194,6 @@ function GenerateTitle(nomTitre){
 
     /* Gallery Content */
 
-
 async function GenerateModaleGallery(works){
     const galleryContainer = document.createElement("div");
     galleryContainer.className = "galleryModale";
@@ -225,6 +224,77 @@ async function GenerateModaleGallery(works){
 }
 
 
+    /* Add Photo Content */ 
+function GenerateimgInputBox(){
+    const addPhotoForm = document.createElement("form");
+    addPhotoForm.id = "addPhotoForm";
+
+    const addPhotoContainer = document.createElement("div");
+    addPhotoContainer.id = "addPhotoContainer";
+    
+
+    const imgInput = document.createElement("input");
+    imgInput.type = "file";
+    imgInput.id = "imgInput";
+    imgInput.innerText = "blablabla";
+    imgInput.accept = "image/png , image/jpg";
+    imgInput.name = "imgInput";
+
+    const imgLogo = document.createElement("i");
+    imgLogo.className = "fa-regular fa-image fa-5x";
+    const addImgButton = document.createElement("button");
+    addImgButton.id = "addImgButton";
+    addImgButton.innerText = "+ Ajouter photo";
+    const addPhotoText = document.createElement("p");
+    addPhotoText.id = "addPhotoText";
+    addPhotoText.innerText = "jpg, png : 4mo max";
+
+    addPhotoContainer.appendChild(imgInput);
+    addPhotoContainer.appendChild(imgLogo);
+    addPhotoContainer.appendChild(addImgButton);
+    addPhotoContainer.appendChild(addPhotoText);
+    addPhotoForm.appendChild(addPhotoContainer);
+
+    modaleContent.appendChild(addPhotoForm);
+
+}
+
+function GenerateAddPhotoModule(){
+    const addPhotoForm = document.querySelector("#addPhotoForm");
+        
+    const titleLabelInputText = document.createElement("label");
+    titleLabelInputText.id = "titleLabelInputText";
+    titleLabelInputText.innerText = "Titre";
+    titleLabelInputText.for = "titleInputText";
+    const titleInputText = document.createElement("input");
+    titleInputText.type = "text";
+    titleInputText.name = "titleInputText";
+    titleInputText.id = "titleInputText";
+    titleInputText.className = "inputText";
+    
+    const catLabelInputText = document.createElement("label");
+    catLabelInputText.id = "catLabelInputText";
+    catLabelInputText.innerText = "Catégorie";
+    catLabelInputText.for = "catInputText";
+    const catInputText = document.createElement("input");
+    catInputText.type = "text";
+    catInputText.name = "catInputText";
+    catInputText.id = "catInputText";
+    catInputText.className = "inputText";
+    
+    const validateButton = document.createElement("input");
+    validateButton.id = "validateButton";
+    validateButton.type = "submit"
+    validateButton.innerText = "Valider";
+    
+    addPhotoForm.appendChild(titleLabelInputText);
+    addPhotoForm.appendChild(titleInputText);
+    addPhotoForm.appendChild(catLabelInputText);
+    addPhotoForm.appendChild(catInputText);
+    addPhotoForm.appendChild(validateButton); 
+}
+
+
     /* modaleOptionsButtons */
 
 function GenerateOptionsButtons(){
@@ -242,64 +312,28 @@ function GenerateOptionsButtons(){
     modaleOptionsButtons.appendChild(deleteGalleryButton);
 
     addPhotoButton.addEventListener("click", function(){
-        modaleContent.innerHTML = "";
-        generateNavButtons();
-        GenerateTitle("Galerie Photo");
-        GenerateAddPhotoModule();
-            
+        loadAddPhotoContent();
     });
 }
 
-function GenerateAddPhotoModule(){
-    const addPhotoContainer = document.createElement("div");
-    addPhotoContainer.id = "addPhotoContainer";
-    const imgLogo = document.createElement("i");
-    imgLogo.className = "fa-regular fa-image fa-5x";
-    const addImgButton = document.createElement("button");
-    addImgButton.id = "addImgButton";
-    addImgButton.innerText = "+ Ajouter photo";
-    const addPhotoText = document.createElement("p");
-    addPhotoText.id = "addPhotoText";
-    addPhotoText.innerText = "jpg, png : 4mo max";
+
+    /* Close modale by click */ 
+
+modale.addEventListener("click",function(event){
+    if (event.target == modale){
+        modale.style.display = "none";
+    }
     
-    const addPhotoForm = document.createElement("form");
-    addPhotoForm.id = "addPhotoForm";
-    
-    const titleLabelInputText = document.createElement("label");
-    titleLabelInputText.id = "titleLabelInputText";
-    titleLabelInputText.innerText = "Titre";
-    titleLabelInputText.for = "titleInputText";
-    const titleInputText = document.createElement("input");
-    titleInputText.type = "text";
-    titleInputText.name = "titleInputText";
-    titleInputText.id = "titleInputText";
+});
 
-    const catLabelInputText = document.createElement("label");
-    catLabelInputText.id = "catLabelInputText";
-    catLabelInputText.innerText = "Catégorie";
-    catLabelInputText.for = "catInputText";
-    const catInputText = document.createElement("input");
-    catInputText.type = "text";
-    catInputText.name = "catInputText";
-    catInputText.id = "catInputText";
 
-    const validateButton = document.createElement("button");
-    validateButton.id = "validateButton";
-    validateButton.innerText = "Valider";
 
-    addPhotoContainer.appendChild(imgLogo);
-    addPhotoContainer.appendChild(addImgButton);
-    addPhotoContainer.appendChild(addPhotoText);
+    /* CONTENT GENERATION FUNCTIONS */
 
-    addPhotoForm.appendChild(titleLabelInputText);
-    addPhotoForm.appendChild(titleInputText);
-    addPhotoForm.appendChild(catLabelInputText);
-    addPhotoForm.appendChild(catInputText);
-
-    modaleContent.appendChild(addPhotoContainer);
-    modaleContent.appendChild(addPhotoForm);
-    modaleContent.appendChild(validateButton);
-}
+    const photo = {
+        "Titre" : "",
+        "Catégorie" : ""
+    }
 
 function loadGallery(){
     modaleContent.innerHTML = "";
@@ -309,16 +343,17 @@ function loadGallery(){
     GenerateOptionsButtons();
 }
 
+function loadAddPhotoContent(){
+    modaleContent.innerHTML = "";
+    generateNavButtons();
+    GenerateTitle("Galerie Photo");
+    GenerateimgInputBox();
+    GenerateAddPhotoModule();
+}
 
-/* Close modale */ 
-
-modale.addEventListener("click",function(event){
-    if (event.target == modale){
-        modale.style.display = "none";
-    }
-    
-});
-
+const titleInputText = document.querySelector("#titleInputText");
+const catInputText = document.querySelector("#catInputText");
+const addImgButton = document.querySelector("#addImgButton");
 
 
 /* LOG IN MODE */
