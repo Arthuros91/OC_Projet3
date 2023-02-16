@@ -244,19 +244,8 @@ function GenerateImgInputBox(){
     imgInput.accept = "image/png , image/jpeg";
     imgInput.name = "imgInput";
 
-    const photo = {
-        "URL" : "",
-        "Titre" : "",
-        "Catégorie" : ""
-    };
-
-    
-    photo.URL = imgInput.files[0];
-
     const imgPreview = document.createElement("img");
     imgPreview.id = "imgPreview";
-
-
 
     imgInput.addEventListener("change", function(){
         const imgurl = window.URL.createObjectURL(imgInput.files[0]);
@@ -267,24 +256,19 @@ function GenerateImgInputBox(){
         addPhotoText.style.display = "none";
     });
 
-
     const imgLogo = document.createElement("i");
     imgLogo.className = "fa-regular fa-image fa-5x";
     const addPhotoText = document.createElement("p");
     addPhotoText.id = "addPhotoText";
     addPhotoText.innerText = "jpg, png : 4mo max";
 
-    ;
     imgInputLabel.appendChild(imgInput);
     addPhotoContainer.appendChild(imgLogo);
     addPhotoContainer.appendChild(imgInputLabel);
     addPhotoContainer.appendChild(addPhotoText);
     addPhotoForm.appendChild(addPhotoContainer);
 
-    modaleContent.appendChild(addPhotoForm);
-
-    
-    
+    modaleContent.appendChild(addPhotoForm);  
 }
 
 function GenerateAddPhotoModule(){
@@ -323,36 +307,22 @@ function GenerateAddPhotoModule(){
         catValue3.value = "Hôtels & Restaurants";
         catValue3.innerText = "Hôtels & Restaurants";
 
+    const validateButton = document.createElement("input");
+    validateButton.id = "validateButton";
+    validateButton.type = "submit"
+    validateButton.innerText = "Valider";
+    
     catInputText.appendChild(catValue);
     catInputText.appendChild(catValue1);
     catInputText.appendChild(catValue2);
     catInputText.appendChild(catValue3);
     catLabelInputText.appendChild(catInputText);
 
-    catInputText.addEventListener("change", function(){
-        console.log(catInputText.value);
-    });
-
-
-    const validateButton = document.createElement("input");
-    validateButton.id = "validateButton";
-    validateButton.type = "submit"
-    validateButton.innerText = "Valider";
-    
-
-
     addPhotoForm.appendChild(titleLabelInputText);
     addPhotoForm.appendChild(titleInputText);
     addPhotoForm.appendChild(catLabelInputText);
     addPhotoForm.appendChild(validateButton); 
 }
-
-const titleInputText = document.querySelector("#titleInputText");
-const catInputText = document.querySelector("#catInputText");
-    
-const imgInput = document.querySelector("#imgInput");
-const validateButton = document.querySelector("#validateButton");
-
 
 
     /* modaleOptionsButtons */
@@ -404,9 +374,8 @@ function loadAddPhotoContent(){
     GenerateTitle("Galerie Photo");
     GenerateImgInputBox();
     GenerateAddPhotoModule();
+    SendInputRespond();
 }
-
-
 
 
 /* LOG IN MODE */
@@ -420,7 +389,6 @@ if (userId !=null){
     openModale();
 }
 
-
 function disconnectUser(){
     login.innerText = "logout";
     login.addEventListener("click", function(){
@@ -429,7 +397,6 @@ function disconnectUser(){
     });
 }
 
-
 function openModale(){
     const modifyButton = document.querySelector(".mainIcon button");
     modifyButton.addEventListener("click", function(){
@@ -437,3 +404,34 @@ function openModale(){
         loadGallery();
     });
 }
+
+
+/* ADD PHOTO FUNCTIONS */
+
+function SendInputRespond(){
+    const photo = {
+        "URL" : "",
+        "Titre" : "",
+        "Catégorie" : ""
+    };
+    
+    const addPhotoForm = document.querySelector("#addPhotoForm");
+    const imgInput = document.querySelector("#imgInput");
+    const titleInputText = document.querySelector("#titleInputText");
+    const catInputText = document.querySelector("#catInputText");
+        
+    const validateButton = document.querySelector("#validateButton");
+    
+    
+    
+    addPhotoForm.addEventListener("submit",function(event){
+        event.preventDefault();
+        photo.URL = imgInput.files[0];
+        photo.Titre = titleInputText.value;
+        photo.Catégorie =  catInputText.value;
+        console.log(photo);
+    });
+    console.log(photo);
+}
+
+
