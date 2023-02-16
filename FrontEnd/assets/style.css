@@ -449,6 +449,11 @@ footer nav ul {
 	align-items: center;
 }
 
+#imgPreview img{
+	height: 50px;
+	
+}
+
 #imgInputLabel{
 	padding:10px 20px;
 	border-radius: 30px;
@@ -456,6 +461,7 @@ footer nav ul {
 	color:#306685;
 	font-family: "Syne";
 	font-size: 16px;
+	margin:0%;
 }
 
 #imgInput{

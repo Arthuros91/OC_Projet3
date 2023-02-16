@@ -226,13 +226,13 @@ async function GenerateModaleGallery(works){
 
     /* Add Photo Content */ 
 
-function GenerateImgInputBox(){
+async function GenerateImgInputBox(){
     const addPhotoForm = document.createElement("form");
     addPhotoForm.id = "addPhotoForm";
 
     const addPhotoContainer = document.createElement("div");
     addPhotoContainer.id = "addPhotoContainer";
-    
+
     const imgInputLabel = document.createElement("label");
     imgInputLabel.id = "imgInputLabel";
     imgInputLabel.innerText = "+ Ajouter Photo";
@@ -241,23 +241,43 @@ function GenerateImgInputBox(){
     imgInput.type = "file";
     imgInput.id = "imgInput";
     imgInput.style.display = "none";
-    imgInput.accept = "image/png , image/jpg";
+    imgInput.accept = "image/png , image/jpeg";
     imgInput.name = "imgInput";
 
-    const imgLogo = document.createElement("i");
-    imgLogo.className = "fa-regular fa-image fa-5x";
+    const photo = {
+        "URL" : "",
+        "Titre" : "",
+        "Catégorie" : ""
+    };
+
+    
+    photo.URL = await imgInput.files[0];
+
+
+      
+
+    const imgPreview = document.createElement("div");
+    imgPreview.id = "imgPreview";
+    imgPreview.innerHTML = "<img src=" + photo.URL + ">";
+    
+
+    //const imgLogo = document.createElement("i");
+    //imgLogo.className = "fa-regular fa-image fa-5x";
     const addPhotoText = document.createElement("p");
     addPhotoText.id = "addPhotoText";
     addPhotoText.innerText = "jpg, png : 4mo max";
 
+    addPhotoContainer.appendChild(imgPreview);
     imgInputLabel.appendChild(imgInput);
-    imgInputLabel.appendChild(imgLogo);
+    //imgInputLabel.appendChild(imgLogo);
     addPhotoContainer.appendChild(imgInputLabel);
     addPhotoContainer.appendChild(addPhotoText);
     addPhotoForm.appendChild(addPhotoContainer);
 
     modaleContent.appendChild(addPhotoForm);
 
+    
+    
 }
 
 function GenerateAddPhotoModule(){
@@ -295,6 +315,13 @@ function GenerateAddPhotoModule(){
     addPhotoForm.appendChild(validateButton); 
 }
 
+const titleInputText = document.querySelector("#titleInputText");
+const catInputText = document.querySelector("#catInputText");
+    
+const imgInput = document.querySelector("#imgInput");
+const validateButton = document.querySelector("#validateButton");
+
+
 
     /* modaleOptionsButtons */
 
@@ -330,10 +357,6 @@ modale.addEventListener("click",function(event){
 
     /* CONTENT GENERATION FUNCTIONS */
 
-    const photo = {
-        "Titre" : "",
-        "Catégorie" : ""
-    }
 
 function loadGallery(){
     modaleContent.innerHTML = "";
@@ -351,11 +374,7 @@ function loadAddPhotoContent(){
     GenerateAddPhotoModule();
 }
 
-const titleInputText = document.querySelector("#titleInputText");
-const catInputText = document.querySelector("#catInputText");
 
-const addImgButton = document.querySelector("#addImgButton");
-const validateButton = document.querySelector("#validateButton");
 
 
 /* LOG IN MODE */
