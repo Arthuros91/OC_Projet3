@@ -440,17 +440,19 @@ footer nav ul {
 }
 
 #addPhotoContainer{
-	height: 30%;
-	width:70%;
+	height: 200px;
+	width:100%;
 	background-color: #E8F1F6;
 	margin: 2% 0%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: space-between;
 }
 
-#imgPreview img{
-	height: 50px;
+#imgPreview{
+	height: 100%;
+	margin-bottom: 5%;
 	
 }
 
@@ -480,6 +482,10 @@ footer nav ul {
 	background-color:#CBD6DC;
 	color:#306685;
 	border: none;
+}
+
+#addPhotoText{
+	margin-bottom:4%;
 }
 
 .inputText{

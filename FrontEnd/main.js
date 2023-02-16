@@ -226,7 +226,7 @@ async function GenerateModaleGallery(works){
 
     /* Add Photo Content */ 
 
-async function GenerateImgInputBox(){
+function GenerateImgInputBox(){
     const addPhotoForm = document.createElement("form");
     addPhotoForm.id = "addPhotoForm";
 
@@ -251,25 +251,32 @@ async function GenerateImgInputBox(){
     };
 
     
-    photo.URL = await imgInput.files[0];
+    photo.URL = imgInput.files[0];
 
-
-      
-
-    const imgPreview = document.createElement("div");
+    const imgPreview = document.createElement("img");
     imgPreview.id = "imgPreview";
-    imgPreview.innerHTML = "<img src=" + photo.URL + ">";
-    
 
-    //const imgLogo = document.createElement("i");
-    //imgLogo.className = "fa-regular fa-image fa-5x";
+
+
+    imgInput.addEventListener("change", function(){
+        const imgurl = window.URL.createObjectURL(imgInput.files[0]);
+        imgPreview.src = imgurl;
+        addPhotoContainer.insertBefore(imgPreview, imgInputLabel);
+        addPhotoContainer.removeChild(imgLogo);
+        imgInputLabel.style.display = "none";
+        addPhotoText.style.display = "none";
+    });
+
+
+    const imgLogo = document.createElement("i");
+    imgLogo.className = "fa-regular fa-image fa-5x";
     const addPhotoText = document.createElement("p");
     addPhotoText.id = "addPhotoText";
     addPhotoText.innerText = "jpg, png : 4mo max";
 
-    addPhotoContainer.appendChild(imgPreview);
+    ;
     imgInputLabel.appendChild(imgInput);
-    //imgInputLabel.appendChild(imgLogo);
+    addPhotoContainer.appendChild(imgLogo);
     addPhotoContainer.appendChild(imgInputLabel);
     addPhotoContainer.appendChild(addPhotoText);
     addPhotoForm.appendChild(addPhotoContainer);
@@ -296,22 +303,47 @@ function GenerateAddPhotoModule(){
     const catLabelInputText = document.createElement("label");
     catLabelInputText.id = "catLabelInputText";
     catLabelInputText.innerText = "Catégorie";
-    catLabelInputText.for = "catInputText";
-    const catInputText = document.createElement("input");
-    catInputText.type = "text";
-    catInputText.name = "catInputText";
-    catInputText.id = "catInputText";
-    catInputText.className = "inputText";
-    
+
+        const catInputText = document.createElement("select");
+        catInputText.id = "catInputText";
+
+        const catValue = document.createElement("option");
+        catValue.value = "";
+        catValue.innerText = "";
+
+        const catValue1 = document.createElement("option");
+        catValue1.value = "Objet";
+        catValue1.innerText = "Objet";
+
+        const catValue2 = document.createElement("option");
+        catValue2.value = "Appartements";
+        catValue2.innerText = "Appartements";
+
+        const catValue3 = document.createElement("option");
+        catValue3.value = "Hôtels & Restaurants";
+        catValue3.innerText = "Hôtels & Restaurants";
+
+    catInputText.appendChild(catValue);
+    catInputText.appendChild(catValue1);
+    catInputText.appendChild(catValue2);
+    catInputText.appendChild(catValue3);
+    catLabelInputText.appendChild(catInputText);
+
+    catInputText.addEventListener("change", function(){
+        console.log(catInputText.value);
+    });
+
+
     const validateButton = document.createElement("input");
     validateButton.id = "validateButton";
     validateButton.type = "submit"
     validateButton.innerText = "Valider";
     
+
+
     addPhotoForm.appendChild(titleLabelInputText);
     addPhotoForm.appendChild(titleInputText);
     addPhotoForm.appendChild(catLabelInputText);
-    addPhotoForm.appendChild(catInputText);
     addPhotoForm.appendChild(validateButton); 
 }
 
