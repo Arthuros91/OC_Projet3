@@ -412,7 +412,7 @@ function SendInputRespond(){
     const photo = {
         "URL" : "",
         "Titre" : "",
-        "Catégorie" : ""
+        "Catégorie"  : null
     };
     
     const addPhotoForm = document.querySelector("#addPhotoForm");
@@ -421,16 +421,44 @@ function SendInputRespond(){
     const catInputText = document.querySelector("#catInputText");
         
     const validateButton = document.querySelector("#validateButton");
+
     
-    
-    
-    addPhotoForm.addEventListener("submit",function(event){
+    addPhotoForm.addEventListener("submit", async function(event){
         event.preventDefault();
-        photo.URL = imgInput.files[0];
+
+        var catNumber = 0;
+        if (catInputText.value == "Objet" ){
+            catNumber = 0;
+        };
+        if (catInputText.value == "Appartements"){
+            catNumber = 1;
+        };
+        if (catInputText.value == "Hôtels & Restaurants" ){
+            catNumber = 2;
+        };
+
+        photo.URL = window.URL.createObjectURL(imgInput.files[0]);
         photo.Titre = titleInputText.value;
-        photo.Catégorie =  catInputText.value;
+        photo.Catégorie =  catNumber;
         console.log(photo);
+
+
+        const userToken = userId;
+
+
+        const chargeUtileInput = JSON.stringify(photo);
+
+        const sendPhoto = await fetch("http://localhost:5678/api/works",{
+            method: "POST",
+            headers : {"Authorization": "Bearer " + userId,
+                "Content-Type" : "form-data"},
+            body: chargeUtileInput
+        });
+        
+        console.log(sendPhoto);
     });
+
+    
     console.log(photo);
 }
 
