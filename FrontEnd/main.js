@@ -208,6 +208,7 @@ async function GenerateModaleGallery(works){
         const imageURL = URL.createObjectURL(images);
         
         const figure = document.createElement("figure");
+        figure.className = "imgFigure";
         const figureImg = document.createElement("img");
 
         figureImg.src= imageURL;
@@ -321,7 +322,7 @@ function GenerateAddPhotoModule(){
         catValue.innerText = "";
 
         const catValue1 = document.createElement("option");
-        catValue1.value = "Objet";
+        catValue1.value = "Objets";
         catValue1.innerText = "Objet";
 
         const catValue2 = document.createElement("option");
@@ -329,8 +330,8 @@ function GenerateAddPhotoModule(){
         catValue2.innerText = "Appartements";
 
         const catValue3 = document.createElement("option");
-        catValue3.value = "Hôtels & Restaurants";
-        catValue3.innerText = "Hôtels & Restaurants";
+        catValue3.value = "Hotels & restaurants";
+        catValue3.innerText = "Hotels & restaurants";
 
     const validateButton = document.createElement("input");
     validateButton.id = "validateButton";
@@ -452,14 +453,14 @@ function SendInputRespond(){
         event.preventDefault();
 
         var catNumber = 0;
-        if (catInputText.value == "Objet" ){
-            catNumber = 0;
-        };
-        if (catInputText.value == "Appartements"){
+        if (catInputText.value == categories[0].name ){
             catNumber = 1;
         };
-        if (catInputText.value == "Hôtels & Restaurants" ){
+        if (catInputText.value == categories[1].name){
             catNumber = 2;
+        };
+        if (catInputText.value == categories[2].name){
+            catNumber = 3;
         };
 
         photo.URL = window.URL.createObjectURL(imgInput.files[0]);
@@ -483,11 +484,9 @@ function SendInputRespond(){
             body: bodych
         });
         
-        console.log(sendPhoto);
+        
     });
 
-    
-    console.log(photo);
 }
 
 
