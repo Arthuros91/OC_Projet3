@@ -6,8 +6,6 @@ const userId = JSON.parse(user);
 
 
 
-console.log(userId);
-
 /* GALLERY GENERATION */
 
 const gallery = document.querySelector(".gallery");
@@ -38,6 +36,7 @@ async function GenerateGallery(works){
 function UpdateGallery(works){
     gallery.innerHTML = "";
     GenerateGallery(works);
+    GenerateModaleGallery(works);
 }
 
 
@@ -126,8 +125,6 @@ editModeButton.innerText = "Appliquer les changements";
 connectBanner.appendChild(icon);
 connectBanner.appendChild(editModeText);
 connectBanner.appendChild(editModeButton);
-
-
 
 
     /* Icons */ 
@@ -228,8 +225,6 @@ async function GenerateModaleGallery(works){
         figure.appendChild(editButton);
         galleryContainer.appendChild(figure);
 
-        
-
         deleteButton.addEventListener("click", async function(event){
             event.preventDefault();
 
@@ -241,10 +236,8 @@ async function GenerateModaleGallery(works){
                 headers: {"Authorization": "Bearer " + userId},
                 body: fileId
             });
-
-
-
-        })
+            loadGallery();
+        });
 
     }
 }
