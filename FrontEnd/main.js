@@ -209,17 +209,42 @@ async function GenerateModaleGallery(works){
         
         const figure = document.createElement("figure");
         const figureImg = document.createElement("img");
+
         figureImg.src= imageURL;
         figureImg.alt = work.title;
         figureImg.className = "modaleImg";
         
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "deleteButton";
+        deleteButton.innerHTML = "<i class=\"fa-solid fa-trash fa-2xs\"></i>";
+
         const editButton = document.createElement("button");
         editButton.innerText = "éditer";
         editButton.className = "modaleGalleryEditButton"
         
         figure.appendChild(figureImg);
+        figure.appendChild(deleteButton);
         figure.appendChild(editButton);
         galleryContainer.appendChild(figure);
+
+        
+
+        deleteButton.addEventListener("click", async function(event){
+            event.preventDefault();
+
+            const fileId = new FormData();
+            fileId.append("id", work.id);
+            
+            const deletephoto = await fetch("http://localhost:5678/api/works/" + work.id,{
+                method: "DELETE",
+                headers: {"Authorization": "Bearer " + userId},
+                body: fileId
+            });
+
+
+
+        })
+
     }
 }
 
@@ -444,15 +469,18 @@ function SendInputRespond(){
 
 
         const userToken = userId;
+        const bodych = new FormData();
 
+        bodych.append("image",imgInput.files[0]);
+        bodych.append("title", titleInputText.value);
+        bodych.append("category", catNumber);
 
         const chargeUtileInput = JSON.stringify(photo);
 
         const sendPhoto = await fetch("http://localhost:5678/api/works",{
             method: "POST",
-            headers : {"Authorization": "Bearer " + userId,
-                "Content-Type" : "form-data"},
-            body: chargeUtileInput
+            headers : {"Authorization": "Bearer " + userId},
+            body: bodych
         });
         
         console.log(sendPhoto);

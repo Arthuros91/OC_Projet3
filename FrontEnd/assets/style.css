@@ -380,7 +380,7 @@ footer nav ul {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	grid-column-gap: 6px;
-	grid-row-gap: 10px;
+	grid-row-gap: 5px;
 	overflow: auto;
 	height:65%;
 	width: 70%;
@@ -392,6 +392,20 @@ footer nav ul {
 .galleryModale img{
 	width:80px;
 	height:105px;
+}
+
+.deleteButton{
+	color:white;
+	background-color: black;
+	position: relative;
+	bottom:105px;
+	left:50px;
+	padding: 4px 6px;
+	border-radius: 5px;
+}
+
+.deleteButton:focus{
+	background-color: grey;
 }
 
 .modaleGalleryEditButton{
