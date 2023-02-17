@@ -19,12 +19,3 @@ Lien pour voir la
 [documentation Swagger](http://localhost:5678/api-docs/)
 
 Pour lire la documentation, utiliser Chrome ou Firefox
-
-
-    if (authentificationUser.token != null){
-        userInput.token = authentificationUser.token;
-        window.location.href="index.html";
-    }
-    else{
-        errorMessage.innerText = "Email ou mot de passe incorrect";
-    }
