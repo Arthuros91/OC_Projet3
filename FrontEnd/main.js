@@ -145,6 +145,26 @@ function addIcons(parentNodeSelector){
     parentNode.appendChild(editIconBox);
 };
 
+function addIcons_underPhoto(){
+    const mainSelector = document.querySelector("main");
+    const portfolio = document.querySelector("#portfolio");
+    const introSelector = document.querySelector("#introduction");
+
+    const icons = document.createElement("div");
+    icons.className = "iconsUnderPhoto editIconBox";
+    icons.style.padding = "0px";
+    icons.style.marginLeft = "57px";
+
+    mainSelector.insertBefore(icons, portfolio);
+    addIcons(".iconsUnderPhoto");
+
+    introSelector.style.marginBottom = "0px";
+
+};
+
+
+
+
 
 /* MODALE */
 
@@ -405,6 +425,7 @@ if (userId !=null){
     connectBanner.style.display = "flex";
     disconnectUser();
     addIcons("#portfolioTitle");
+    addIcons_underPhoto();
     openModale();
 }
 

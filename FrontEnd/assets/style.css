@@ -113,13 +113,16 @@ ul a{
 li:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -129,6 +132,7 @@ li:hover {
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -136,6 +140,11 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+#portfolio{
+	margin: 150px 0px;
+}
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
@@ -163,7 +172,6 @@ button:focus{
 	color:white;
 }
 
-
 .gallery {
 	width: 100%;
 	display: grid;
@@ -179,15 +187,18 @@ button:focus{
 
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
+
 #contact > * {
 	text-align: center;
 
 }
+
 #contact h2{
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
 	margin-top:30px;
@@ -201,9 +212,11 @@ input {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -386,7 +399,6 @@ footer nav ul {
 	width: 70%;
 	align-self: center;
 	margin:0%;
-	
 }
 
 .imgFigure{
@@ -509,9 +521,19 @@ footer nav ul {
 .inputText{
 	width: 70%;
 }
+#catLabelInputText{
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	width:70%;
+}
 
 #catInputText{
 	margin-bottom:10%;
+	margin:25px;
+	width:100%;
+	height: 50px;
+	box-shadow: 0px 4px 14px rgb(0 0 0 / 9%);
 }
 
 #validateButton{
