@@ -137,6 +137,7 @@ function addIcons(parentNodeSelector){
     icon.className = "fa-regular fa-pen-to-square "; 
     const editModeText = document.createElement("button");
     editModeText.innerText = "modifier";
+    editModeText.id = "modifyButton";
 
     editIconBox.appendChild(icon);
     editIconBox.appendChild(editModeText);
@@ -156,10 +157,20 @@ function addIcons_underPhoto(){
     icons.style.marginLeft = "57px";
 
     mainSelector.insertBefore(icons, portfolio);
-    addIcons(".iconsUnderPhoto");
 
+    const editIconBox= document.createElement("div");
+    editIconBox.className = "editIconBox";
+    
+    const icon = document.createElement("i");
+    icon.className = "fa-regular fa-pen-to-square "; 
+    const editModeText = document.createElement("button");
+    editModeText.innerText = "modifier";
+
+    editIconBox.appendChild(icon);
+    editIconBox.appendChild(editModeText);
+
+    icons.appendChild(editIconBox);
     introSelector.style.marginBottom = "0px";
-
 };
 
 
@@ -178,6 +189,23 @@ modale.appendChild(modaleContent);
 
     /* Navigations Button */
 
+
+function generateNavButtons_withoutReturn(){
+    const navButtons = document.createElement("div");
+    navButtons.id = "navButtonsHome";
+    const closeButton = document.createElement("button");
+    closeButton.className = "closeButton ";
+    closeButton.id="closeButtonHome";
+    closeButton.innerText = "X";
+
+    navButtons.appendChild(closeButton)
+    modaleContent.appendChild(navButtons);
+
+    closeButton.addEventListener("click", function(){
+        modale.style.display = "none";
+    });
+};
+
 function generateNavButtons(){
     const navButtons = document.createElement("div");
     navButtons.id = "navButtons";
@@ -192,6 +220,9 @@ function generateNavButtons(){
     navButtons.appendChild(closeButton)
     modaleContent.appendChild(navButtons);
 
+    returnButton.addEventListener("click", function(){
+        loadGallery();
+    });
     closeButton.addEventListener("click", function(){
         modale.style.display = "none";
     });
@@ -256,7 +287,7 @@ async function GenerateModaleGallery(works){
                 headers: {"Authorization": "Bearer " + userId},
                 body: fileId
             });
-            loadGallery();
+            openModale();
         });
 
     }
@@ -401,7 +432,7 @@ modale.addEventListener("click",function(event){
 
 function loadGallery(){
     modaleContent.innerHTML = "";
-    generateNavButtons();
+    generateNavButtons_withoutReturn();
     GenerateTitle("Galerie Photo");
     GenerateModaleGallery(works);
     GenerateOptionsButtons();
@@ -419,7 +450,8 @@ function loadAddPhotoContent(){
 
 /* LOG IN MODE */
 
-const login = document.querySelector(".login");
+const login = document.querySelector("#loginIndex");
+
 
 if (userId !=null){
     connectBanner.style.display = "flex";
@@ -438,7 +470,7 @@ function disconnectUser(){
 }
 
 function openModale(){
-    const modifyButton = document.querySelector(".mainIcon button");
+    const modifyButton = document.querySelector("#modifyButton");
     modifyButton.addEventListener("click", function(){
         modale.style.display = "flex";
         loadGallery();
@@ -483,19 +515,17 @@ function SendInputRespond(){
         console.log(photo);
 
 
-        const userToken = userId;
-        const bodych = new FormData();
+        const bodyData = new FormData();
 
-        bodych.append("image",imgInput.files[0]);
-        bodych.append("title", titleInputText.value);
-        bodych.append("category", catNumber);
+        bodyData.append("image",imgInput.files[0]);
+        bodyData.append("title", titleInputText.value);
+        bodyData.append("category", catNumber);
 
-        const chargeUtileInput = JSON.stringify(photo);
 
         const sendPhoto = await fetch("http://localhost:5678/api/works",{
             method: "POST",
             headers : {"Authorization": "Bearer " + userId},
-            body: bodych
+            body: bodyData
         });
         
         
