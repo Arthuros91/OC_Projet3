@@ -4,7 +4,8 @@ const works = await reponse.json();
 const user = window.localStorage.getItem("userId");
 const userId = JSON.parse(user);
 
-
+console.log(userId);
+const modale = document.querySelector("#modale");
 
 /* GALLERY GENERATION */
 
@@ -36,7 +37,7 @@ async function GenerateGallery(works){
 function UpdateGallery(works){
     gallery.innerHTML = "";
     GenerateGallery(works);
-    GenerateModaleGallery(works);
+    
 }
 
 
@@ -146,6 +147,7 @@ function addIcons(parentNodeSelector){
     parentNode.appendChild(editIconBox);
 };
 
+
 function addIcons_underPhoto(){
     const mainSelector = document.querySelector("main");
     const portfolio = document.querySelector("#portfolio");
@@ -180,7 +182,7 @@ function addIcons_underPhoto(){
 /* MODALE */
 
 const header = document.querySelector("header");
-const modale = document.querySelector("#modale");
+
 
 const modaleContent = document.createElement("div");
 modaleContent.className = "modaleContent";
@@ -246,7 +248,7 @@ async function GenerateModaleGallery(works){
     const galleryContainer = document.createElement("div");
     galleryContainer.className = "galleryModale";
 
-    modaleContent.append(galleryContainer);
+    modaleContent.appendChild(galleryContainer);
 
     for (let i = 0; i< works.length ; i++){
     
@@ -287,7 +289,7 @@ async function GenerateModaleGallery(works){
                 headers: {"Authorization": "Bearer " + userId},
                 body: fileId
             });
-            openModale();
+            
         });
 
     }
@@ -495,7 +497,7 @@ function SendInputRespond(){
     const validateButton = document.querySelector("#validateButton");
 
     
-    addPhotoForm.addEventListener("submit", async function(event){
+    validateButton.addEventListener("submit", async function(event){
         event.preventDefault();
 
         var catNumber = 0;
