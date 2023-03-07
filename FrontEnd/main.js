@@ -4,12 +4,11 @@ const works = await reponse.json();
 const user = window.localStorage.getItem("userId");
 const userId = JSON.parse(user);
 
-console.log(userId);
-const modale = document.querySelector("#modale");
-
-/* GALLERY GENERATION */
 
 const gallery = document.querySelector(".gallery");
+/* GALLERY GENERATION */
+
+
 
 async function GenerateGallery(works){
     
@@ -31,17 +30,20 @@ async function GenerateGallery(works){
         figure.appendChild(figureImg);
         figure.appendChild(figcaption);
         gallery.appendChild(figure);
-    }
+    };
+    
 }
 
 function UpdateGallery(works){
     gallery.innerHTML = "";
-    GenerateGallery(works);
-    
-}
+    GenerateGallery(works);  
+};
 
 
 UpdateGallery(works);
+
+
+
 
 
 
@@ -130,23 +132,28 @@ connectBanner.appendChild(editModeButton);
 
     /* Icons */ 
 
-function addIcons(parentNodeSelector){
+function addIcons(){
+    const portfolio = document.querySelector("#portfolioTitle");
     const editIconBox= document.createElement("div");
     editIconBox.className = "editIconBox mainIcon";
     
     const icon = document.createElement("i");
     icon.className = "fa-regular fa-pen-to-square "; 
-    const editModeText = document.createElement("button");
-    editModeText.innerText = "modifier";
-    editModeText.id = "modifyButton";
+    const editModeButton = document.createElement("button");
+    editModeButton.innerText = "modifier";
+    editModeButton.id = "modifyButton";
+
+    editModeButton.addEventListener("click", function(){
+        modale.style.display = "flex";
+        loadModaleGallery(works);
+    });
 
     editIconBox.appendChild(icon);
-    editIconBox.appendChild(editModeText);
+    editIconBox.appendChild(editModeButton);
+    portfolio.appendChild(editIconBox);
 
-    const parentNode = document.querySelector(parentNodeSelector);
-    parentNode.appendChild(editIconBox);
+
 };
-
 
 function addIcons_underPhoto(){
     const mainSelector = document.querySelector("main");
@@ -177,12 +184,10 @@ function addIcons_underPhoto(){
 
 
 
-
-
 /* MODALE */
 
 const header = document.querySelector("header");
-
+const modale = document.querySelector("#modale");
 
 const modaleContent = document.createElement("div");
 modaleContent.className = "modaleContent";
@@ -223,8 +228,9 @@ function generateNavButtons(){
     modaleContent.appendChild(navButtons);
 
     returnButton.addEventListener("click", function(){
-        loadGallery();
+        loadModaleGallery(works);
     });
+
     closeButton.addEventListener("click", function(){
         modale.style.display = "none";
     });
@@ -280,21 +286,27 @@ async function GenerateModaleGallery(works){
 
         deleteButton.addEventListener("click", async function(event){
             event.preventDefault();
-
-            const fileId = new FormData();
-            fileId.append("id", work.id);
-            
-            const deletephoto = await fetch("http://localhost:5678/api/works/" + work.id,{
-                method: "DELETE",
-                headers: {"Authorization": "Bearer " + userId},
-                body: fileId
-            });
-            
+            deletePhoto(work.id);
+            let newReponse = await fetch("http://localhost:5678/api/works");
+            const newWorks = await newReponse.json();
+            loadModaleGallery(newWorks);
+            UpdateGallery(newWorks);
         });
 
     }
 }
 
+async function  deletePhoto(workID){
+    const fileId = new FormData();
+    fileId.append("id", workID);
+            
+    const deletephoto = await fetch("http://localhost:5678/api/works/" + workID,{
+        method: "DELETE",
+        headers: {"Authorization": "Bearer " + userId},
+        body: fileId
+    });
+    
+}
 
     /* Add Photo Content */ 
 
@@ -432,7 +444,7 @@ modale.addEventListener("click",function(event){
     /* CONTENT GENERATION FUNCTIONS */
 
 
-function loadGallery(){
+function loadModaleGallery(works){
     modaleContent.innerHTML = "";
     generateNavButtons_withoutReturn();
     GenerateTitle("Galerie Photo");
@@ -446,7 +458,7 @@ function loadAddPhotoContent(){
     GenerateTitle("Galerie Photo");
     GenerateImgInputBox();
     GenerateAddPhotoModule();
-    SendInputRespond();
+    SendInputResponse();
 }
 
 
@@ -458,9 +470,9 @@ const login = document.querySelector("#loginIndex");
 if (userId !=null){
     connectBanner.style.display = "flex";
     disconnectUser();
-    addIcons("#portfolioTitle");
+    addIcons();
     addIcons_underPhoto();
-    openModale();
+
 }
 
 function disconnectUser(){
@@ -471,23 +483,12 @@ function disconnectUser(){
     });
 }
 
-function openModale(){
-    const modifyButton = document.querySelector("#modifyButton");
-    modifyButton.addEventListener("click", function(){
-        modale.style.display = "flex";
-        loadGallery();
-    });
-}
 
 
 /* ADD PHOTO FUNCTIONS */
 
-function SendInputRespond(){
-    const photo = {
-        "URL" : "",
-        "Titre" : "",
-        "Catégorie"  : null
-    };
+function SendInputResponse(){
+
     
     const addPhotoForm = document.querySelector("#addPhotoForm");
     const imgInput = document.querySelector("#imgInput");
@@ -495,27 +496,23 @@ function SendInputRespond(){
     const catInputText = document.querySelector("#catInputText");
         
     const validateButton = document.querySelector("#validateButton");
-
+    var catNumber = 0;
     
-    validateButton.addEventListener("submit", async function(event){
+    addPhotoForm.addEventListener("submit", async function(event){
         event.preventDefault();
-
-        var catNumber = 0;
         if (catInputText.value == categories[0].name ){
             catNumber = 1;
-        };
-        if (catInputText.value == categories[1].name){
+        }
+        else if (catInputText.value == categories[1].name){
             catNumber = 2;
-        };
-        if (catInputText.value == categories[2].name){
+        }
+        else if (catInputText.value == categories[2].name){
             catNumber = 3;
-        };
-
-        photo.URL = window.URL.createObjectURL(imgInput.files[0]);
-        photo.Titre = titleInputText.value;
-        photo.Catégorie =  catNumber;
-        console.log(photo);
-
+        }
+        else{
+            console.log("error: there is no category");
+            return
+        }
 
         const bodyData = new FormData();
 
@@ -529,6 +526,10 @@ function SendInputRespond(){
             headers : {"Authorization": "Bearer " + userId},
             body: bodyData
         });
+        let newReponse = await fetch("http://localhost:5678/api/works");
+        const newWorks = await newReponse.json();
+        loadModaleGallery(newWorks);
+        UpdateGallery(newWorks);
         
         
     });
