@@ -1,4 +1,6 @@
 
+const serverName = "http://localhost:5678/api/";
+
 const authentificationForm = document.querySelector("#inputBox");
 const errorMessage = document.querySelector(".errorMessage");
 
@@ -22,7 +24,7 @@ authentificationForm.addEventListener("submit",async function(event){
     userInput.password = passwordInput.value;
     const chargeUtileInput = JSON.stringify(userInput);
 
-    const envoiInput = await fetch("http://localhost:5678/api/users/login",{
+    const envoiInput = await fetch(serverName + "users/login",{
         method: "POST",
         headers: {"Content-Type" : "application/json"},
         body: chargeUtileInput

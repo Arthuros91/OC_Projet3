@@ -1,11 +1,15 @@
-const reponse = await fetch("http://localhost:5678/api/works");
+const serverName = "http://localhost:5678/api/";
+const serverNameWorks = serverName + "works/";
+
+const reponse = await fetch(serverNameWorks);
 const works = await reponse.json();
 
 const user = window.localStorage.getItem("userId");
 const userId = JSON.parse(user);
-
+var sucessCheck = false;
 
 const gallery = document.querySelector(".gallery");
+
 /* GALLERY GENERATION */
 
 
@@ -76,7 +80,7 @@ btnCategoriesBox.appendChild(btnHR);
 
     /*Buttons Functions */
 
-const reponseCat = await fetch("http://localhost:5678/api/categories");
+const reponseCat = await fetch(serverName + "categories");
 const categories = await reponseCat.json();
 
 
@@ -244,7 +248,21 @@ function GenerateTitle(nomTitre){
     modaleTitle.className = "modaleTitle";
     modaleTitle.innerText = nomTitre;
     
+    const sucessMessage = document.createElement("p");
+    sucessMessage.innerText = "La photo a bien été ajoutée";
+    sucessMessage.id = "addPhotoSucess";
+    
+
+    modaleContent.appendChild(sucessMessage);
     modaleContent.appendChild(modaleTitle);
+
+    if (sucessCheck == true){
+        sucessMessage.style.display = "initial";
+        sucessCheck = false;
+    }
+    else{
+        sucessMessage.style.display = "none";
+    }
 }
 
 
@@ -287,7 +305,7 @@ async function GenerateModaleGallery(works){
         deleteButton.addEventListener("click", async function(event){
             event.preventDefault();
             deletePhoto(work.id);
-            let newReponse = await fetch("http://localhost:5678/api/works");
+            let newReponse = await fetch(serverNameWorks);
             const newWorks = await newReponse.json();
             loadModaleGallery(newWorks);
             UpdateGallery(newWorks);
@@ -300,7 +318,7 @@ async function  deletePhoto(workID){
     const fileId = new FormData();
     fileId.append("id", workID);
             
-    const deletephoto = await fetch("http://localhost:5678/api/works/" + workID,{
+    const deletephoto = await fetch(serverName + "works/" + workID,{
         method: "DELETE",
         headers: {"Authorization": "Bearer " + userId},
         body: fileId
@@ -521,16 +539,20 @@ function SendInputResponse(){
         bodyData.append("category", catNumber);
 
 
-        const sendPhoto = await fetch("http://localhost:5678/api/works",{
+        const sendPhoto = await fetch(serverNameWorks,{
             method: "POST",
             headers : {"Authorization": "Bearer " + userId},
             body: bodyData
+        })
+        .then(response =>{
+            if(response.ok){
+                sucessCheck = true;
+            }
         });
-        let newReponse = await fetch("http://localhost:5678/api/works");
+        let newReponse = await fetch(serverNameWorks);
         const newWorks = await newReponse.json();
         loadModaleGallery(newWorks);
         UpdateGallery(newWorks);
-        
         
     });
 
