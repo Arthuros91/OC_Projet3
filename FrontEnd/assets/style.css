@@ -266,7 +266,7 @@ footer nav ul {
 	display: flex;
 	flex-direction: column;
 	margin: 35px 0px 355px 0px;
-	width:33%;
+	width:370px;
 }
 
 #passwordForgot{
@@ -621,5 +621,11 @@ footer nav ul {
 		width: 30px;
 		height: 30px;
 	}
+
+
+	#inputBox {
+		width: 90%;
+	}
+
 
 }
